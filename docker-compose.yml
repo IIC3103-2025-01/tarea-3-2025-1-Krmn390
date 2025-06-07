@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: ankane/pgvector
+    container_name: postgres_vector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mi_basededatos
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: backend_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=mi_basededatos
+      - DB_HOST=db
+      - DB_PORT=5432
+      - LLM_API_URL=https://asteroide.ing.uc.cl/api/chat
+      - LLM_MODEL=integracion
+      - LLM_TEMPERATURE=6
+      - LLM_MAX_TOKENS=512
+      - LLM_REPEAT_LAST_N=10
+      - LLM_TOP_K=18
+      - LLM_RATE_LIMIT=10
+      - LLM_RESPONSE_TIME_LIMIT=120
+      - EMBEDDING_MODEL=nomic-embed-text
+      - EMBEDDING_API_URL=https://asteroide.ing.uc.cl/api/embed
+    depends_on:
+      - db
+    networks:
+      - app-network
+    command: >
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_app
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    command: npm run dev -- --host
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+psycopg[binary]
+langchain
+langchain-core
+langchain-community
+langchain-postgres
+langchain-text-splitters
+beautifulsoup4
+python-dotenv
+requests
+pydantic
+langdetect

@@ -27,7 +27,5 @@ def scrape_wikipedia_article(url: str) -> str:
     raw_text = '\n'.join(
         [p.get_text().strip() for p in paragraphs if p.get_text().strip()]
     )
-    cool_text = clean_text(raw_text)
-    print(cool_text)
 
-    return cool_text
+    return clean_text(raw_text)
