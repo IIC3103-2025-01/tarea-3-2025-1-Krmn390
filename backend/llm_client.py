@@ -1,4 +1,5 @@
 import requests
+from ratelimit import limits, sleep_and_retry
 from my_config import (
     LLM_API_URL,
     LLM_MODEL,
@@ -8,7 +9,9 @@ from my_config import (
     LLM_TOP_K
 )
 
-
+# Limitar a 10 requests por segundo
+@sleep_and_retry
+@limits(calls=10, period=1)
 def query_llm(context: str, question: str) -> str:
     payload = {
         "model": LLM_MODEL,

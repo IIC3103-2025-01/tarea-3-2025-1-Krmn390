@@ -26,6 +26,7 @@ input, textarea {
 
 /* Área de respuesta */
 .response-box {
+  color: black;
   min-height: 150px;
   background-color: #f3f4f6;
   padding: 1rem;
