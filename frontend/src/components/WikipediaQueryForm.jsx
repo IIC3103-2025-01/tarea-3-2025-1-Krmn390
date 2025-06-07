@@ -14,7 +14,7 @@ export default function WikipediaQueryForm() {
     setResponse(null);
 
     try {
-      const res = await fetch('http://localhost:8000/query', {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
