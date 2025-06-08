@@ -5,12 +5,13 @@ from scraper import scrape_wikipedia_article
 from langdetect import detect
 from llm_client import query_llm
 from rag import split_text, store_embeddings, similarity_search
+from my_config import FRONTEND_URL
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[FRONTEND_URL],
     allow_methods=["*"],
     allow_headers=["*"],
 )

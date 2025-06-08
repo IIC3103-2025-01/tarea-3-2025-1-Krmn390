@@ -27,3 +27,5 @@ db_port = os.getenv("DB_PORT", "5432")
 
 embedding_model = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
 EMBEDDING_API_URL = os.getenv("EMBEDDING_API_URL", "https://api.nomic.ai/v1/embed-text")
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
