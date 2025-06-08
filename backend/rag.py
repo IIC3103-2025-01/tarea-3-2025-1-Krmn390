@@ -91,7 +91,8 @@ def similarity_search(query, collection_name="wikipedia_articles", k=5):
     query_embedding = generate_embedding(query)
 
     # 2. Conectar a PGVector
-    connection = f"postgresql+psycopg://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
+    connection = f"postgresql+psycopg://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}?sslmode=require"
+
     embedding_function = EmbeddingFunction()
 
     vectorstore = PGVector(
