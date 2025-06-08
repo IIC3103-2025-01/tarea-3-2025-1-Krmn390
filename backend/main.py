@@ -20,6 +20,11 @@ class QueryRequest(BaseModel):
     url: str
     question: str
 
+@app.get("/")
+def read_root():
+    return {"message": "Backend is up and running!"}
+
+
 @app.post("/query")
 def query_wikipedia(data: QueryRequest):
     try:
