@@ -61,7 +61,7 @@ def store_embeddings(chunks, collection_name="wikipedia_articles"):
         embedding = generate_embedding(chunk)
         embeddings.append((chunk, embedding))
 
-    connection = f"postgresql+psycopg://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
+    connection = f"postgresql+psycopg://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}?sslmode=require"
     embedding_function = EmbeddingFunction()
 
     vectorstore = PGVector(
